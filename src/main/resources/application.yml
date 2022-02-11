@@ -20,7 +20,8 @@ spring:
         git:
           order: 1
           label: main
-          uri: "C:/Users/aps/Documents/GitHub/demo-configs"
+          #uri: "D:/development/GitHub/techfridays/demo-configs"
+          uri: https://github.com/aps-dnxt/config-client.git
           ref: main
           search-paths:
             - '{application}'

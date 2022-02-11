@@ -1,27 +1,59 @@
 spring:
-  profiles:    active: jdbc, native
+  profiles:
+    active: jdbc, native, git
+  application:
+    name: demo-config-server
   cloud:
-    config:      server:
-        default-label: DGC
-        default-profile: local                        jdbc:          enabled: true
-          order: 1
+    config:      
+      server:
+        default-label: main
+        default-profile: dev                
+        jdbc:
+          enabled: true
+          order: 3
           sql: SELECT KEY, VALUE from PROPERTIES where APPLICATION=? and PROFILE=? and LABEL=?          
         native:          
           order: 2
-          search-locations:          - file:///./config
+          search-locations:
+          - file:///./config
           - file:///./config/{application}
-  datasource:    url: jdbc:h2:file:./configdb
+        git:
+          order: 1
+          label: main
+          uri: "C:/Users/aps/Documents/GitHub/demo-configs"
+          ref: main
+          search-paths:
+            - '{application}'
+          
+
+  datasource:
+    url: jdbc:h2:file:./configdb
     password: configdb
     username: configdb
-  h2:    console:      enabled: true
+  h2:
+    console:
+      enabled: true
       path: /h2-console
 server:
   port: 8888
   
-management:  endpoint:    health:      enabled: true
-      probes:        enabled: false
-    metrics:      enabled: true
-    configprops:      enabled: true  endpoints:    web:      exposure:        include: '*'logging:  level:    web: DEBUG
-    '[org.h2.jdbc]': DEBUG
-    '[org.hibernate]': DEBUG    
-    root: DEBUG
+management:
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: false
+    metrics:
+      enabled: true
+    configprops:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+logging:
+  level:
+    web: DEBUG
+    '[org.h2.jdbc]': INFO
+    '[org.hibernate]': INFO    
+    root: INFO

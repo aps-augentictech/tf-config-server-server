@@ -1,4 +1,4 @@
-package com.example.demo;
+package pt.dnxt.techfridays.configserver.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;

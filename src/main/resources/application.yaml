@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: jdbc, native, git
+    active:  git #native, jdbc
   application:
     name: demo-config-server
   cloud:
@@ -12,16 +12,17 @@ spring:
         #   enabled: false
         #   order: 3
         #   sql: SELECT KEY, VALUE from PROPERTIES where APPLICATION=? and PROFILE=? and LABEL=?          
-        # native:          
-        #   order: 2
-        #   enabled: false
-        #   search-locations:
-        #   - file:///./config
-        #   - file:///./config/{application}
+        native:          
+           order: 2
+           enabled: false
+           search-locations:
+           - file:///../demo-configs
+           - file:///../demo-config/{application}
         git:
           order: 1          
-          #uri: "D:/development/GitHub/techfridays/demo-configs"
-          uri: https://github.com/aps-dnxt/config-client.git          
+          #uri: "file:///D:/development/GitHub/techfridays/demo-configs"
+          uri: https://github.com/aps-dnxt/demo-configs.git
+          cloneOnStart: true
           search-paths:
             - '{application}'
           

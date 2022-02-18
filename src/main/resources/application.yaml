@@ -8,21 +8,20 @@ spring:
       server:
         default-label: main
         default-profile: dev                
-        jdbc:
-          enabled: true
-          order: 3
-          sql: SELECT KEY, VALUE from PROPERTIES where APPLICATION=? and PROFILE=? and LABEL=?          
-        native:          
-          order: 2
-          search-locations:
-          - file:///./config
-          - file:///./config/{application}
+        # jdbc:
+        #   enabled: false
+        #   order: 3
+        #   sql: SELECT KEY, VALUE from PROPERTIES where APPLICATION=? and PROFILE=? and LABEL=?          
+        # native:          
+        #   order: 2
+        #   enabled: false
+        #   search-locations:
+        #   - file:///./config
+        #   - file:///./config/{application}
         git:
-          order: 1
-          label: main
+          order: 1          
           #uri: "D:/development/GitHub/techfridays/demo-configs"
-          uri: https://github.com/aps-dnxt/config-client.git
-          ref: main
+          uri: https://github.com/aps-dnxt/config-client.git          
           search-paths:
             - '{application}'
           
@@ -38,15 +37,28 @@ spring:
 server:
   port: 8888
   
+tomcat:
+    mbeanregistry:
+      enabled: true
+      
 management:
   endpoint:
     health:
+      show-details: always
       enabled: true
       probes:
-        enabled: false
+        enabled: true
+    info:
+      enabled: true
     metrics:
       enabled: true
-    configprops:
+    prometheus:
+      enabled: true 
+    mappings:
+      enabled: true
+    loggers:
+      enabled: true
+    sessions:
       enabled: true
   endpoints:
     web:
